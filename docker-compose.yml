@@ -1,12 +1,12 @@
 services:
   ros_capra_talker:
     build: ./src/capra_talker/
-    command: ros2 run demo_nodes_cpp talker
+    command: ros2 pkg list
     volumes:
-      - ./src/capra_talker:/ros2_ws/src/capra_talker
+      - ./src:/ros2_ws/src
 
   ros_capra_listener:
     build: ./src/capra_listener/
-    command: ros2 run demo_nodes_cpp listener
+    command: ros2 pkg list
     volumes:
-      - ./src/capra_listener:/ros2_ws/src/capra_listener
+      - ./src:/ros2_ws/src

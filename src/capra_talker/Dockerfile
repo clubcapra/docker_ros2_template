@@ -1,24 +1,21 @@
 FROM osrf/ros:humble-desktop
 
-#WORKDIR /root/dev
 
-#RUN sed -i "$ d" /ros_entrypoint.sh
-#RUN echo 'source "/root/dev/install/setup.bash"' >> /ros_entrypoint.sh
-#RUN echo 'exec "$@"' >> /ros_entrypoint.sh
+RUN mkdir -p /ros2_ws/src/capra_talker
 
+COPY . /ros2_ws/src
 
-#RUN apt-get update && apt-get install -y --no-install-recommends
-#RUN apt-get install python3-pip -y
-#RUN pip3 install --no-cache-dir --upgrade pip && \
-#    pip3 install --no-cache-dir tornado && \
-#    pip3 install --no-cache-dir simplejpeg && \
-#    pip3 install tensorflow &&\
-#    pip3 install tensorflow-addons &&\
-#    pip3 install tensorflow-datasets
+WORKDIR /ros2_ws
 
+#RUN /opt/ros/humble/setup.sh 
+RUN colcon build
 
-#WORKDIR /root/dev
+#RUN source install/setup.sh
 
-#RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select erbi_base
+RUN sed -i "$d" /ros_entrypoint.sh
+RUN echo 'source "/ros2_ws/install/setup.bash"' >> /ros_entrypoint.sh
+RUN echo 'exec "$@"' >> /ros_entrypoint.sh
 
-#RUN echo ". install/setup.bash" >> /opt/ros/humble/setup.bash
+#RUN source /ros2_ws/src/install/setup.sh
+
+ENTRYPOINT ["/ros_entrypoint.sh"]
