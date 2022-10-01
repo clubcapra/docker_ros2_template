@@ -1,22 +1,14 @@
 FROM osrf/ros:humble-desktop
 
-WORKDIR /ros2_ws
+ENV ROS2_WS /home/ros2_ws
 
-#RUN sed -i "$ d" /ros_entrypoint.sh
-#RUN echo 'source "/ros2_ws/install/setup.bash"' >> /ros_entrypoint.sh
-#RUN echo 'exec "$@"' >> /ros_entrypoint.sh
+RUN mkdir -p ${ROS2_WS}
 
-#RUN . /opt/ros/humble/setup.sh && colcon build --symlink-install --packages-select capra_listener
+WORKDIR ${ROS2_WS}
 
-RUN colcon build
-#RUN echo ". install/setup.bash" >> /opt/ros/humble/setup.bash
+COPY . ${ROS2_WS}/src/capra_listener
 
-#RUN source install/setup.sh
+# Build the package using colcon. Change for the name of your package
+RUN colcon build --symlink-install --packages-select capra_listener
 
-COPY . /ros2_ws/src
-
-RUN sed -i "$d" /ros_entrypoint.sh
-RUN echo 'source "/ros2_ws/install/setup.bash"' >> /ros_entrypoint.sh
-RUN echo 'exec "$@"' >> /ros_entrypoint.sh
-
-ENTRYPOINT ["/ros_entrypoint.sh"]
+RUN echo "source install/setup.bash" >> /opt/ros/$ROS_DISTRO/setup.bash

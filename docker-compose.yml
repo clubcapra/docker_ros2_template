@@ -1,12 +1,12 @@
 services:
   ros_capra_talker:
     build: ./src/capra_talker/
-    command: ros2 pkg list
+    command: ros2 run capra_talker talker
     volumes:
-      - ./src:/ros2_ws/src
+      - ./src:/home/ros2_ws/src
 
   ros_capra_listener:
     build: ./src/capra_listener/
-    command: ros2 pkg list
+    command: ros2 run capra_listener listener
     volumes:
-      - ./src:/ros2_ws/src
+      - ./src:/home/ros2_ws/src
