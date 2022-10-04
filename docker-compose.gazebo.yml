@@ -1,7 +1,7 @@
 services:
-  ros_nanosaur_simulation:
+  ros_gazebo_simulation:
     build: ./src/gazebo_sim/
-    command: gazebo
+    command: gazebo --verbose /opt/ros/humble/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
     environment:
       - DISPLAY=host.docker.internal:0.0
     volumes:

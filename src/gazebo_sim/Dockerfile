@@ -1,6 +1,13 @@
-FROM gazebo
+FROM osrf/ros:humble-desktop
 
-ENV ROS2_WS /home/ros2_ws
+RUN mkdir -p /home/sim
+
+ENV ROS2_WS /home/sim
+
+RUN apt-get update
+RUN apt-get install ros-humble-gazebo-ros-pkgs -y 
+RUN apt install ros-humble-ros-core ros-humble-geometry2
+
 
 RUN mkdir -p ${ROS2_WS}
 
