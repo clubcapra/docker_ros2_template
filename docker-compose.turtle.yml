@@ -2,6 +2,7 @@ services:
   ros_turtle:
     build: ./src/turtle_sim/
     command: ros2 run turtlesim turtlesim_node
+    network_mode: host
     environment:
       - DISPLAY=host.docker.internal:0.0
     volumes:
@@ -11,6 +12,7 @@ services:
   rqt:
     build: ./src/turtle_sim/
     command: rqt
+    network_mode: host
     environment:
       - DISPLAY=host.docker.internal:0.0
     volumes:

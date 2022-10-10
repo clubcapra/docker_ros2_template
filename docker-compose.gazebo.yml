@@ -2,6 +2,7 @@ services:
   ros_gazebo_simulation:
     build: ./src/gazebo_sim/
     command: gazebo --verbose /opt/ros/humble/share/gazebo_plugins/worlds/gazebo_ros_diff_drive_demo.world
+    image: etswalkingmachine/base_gazebo:latest 
     environment:
       - DISPLAY=host.docker.internal:0.0
     volumes:
