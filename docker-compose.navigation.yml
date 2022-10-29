@@ -1,0 +1,10 @@
+services:
+  ros_navigation:
+    build: ./src/navigation/
+    command: ros2 launch nav2_bringup tb3_simulation_launch.py headless:=False
+    network_mode: host
+    environment:
+      - DISPLAY=host.docker.internal:0.0
+    volumes:
+      - ./src:/home/ros2_ws/src
+      - /tmp/.X11-unix:/tmp/.X11-unix  
